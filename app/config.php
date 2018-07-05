@@ -1,4 +1,11 @@
 <?php
 return [
-    'uploadsFolder' => 'uploads/'
+    "database" => [
+        "driver" => "mysql",
+        "host" => "localhost",
+        "database_name" => "php02",
+        "username" => "root",
+        "password" => ""
+    ],
+    "uploadsFolder" => "uploads/"
 ];
