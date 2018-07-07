@@ -40,7 +40,7 @@ class Database
         $stmt = $this->pdo->prepare($select->getStatement());
         $stmt->execute($select->getBindValues());
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function create($table, $data)
