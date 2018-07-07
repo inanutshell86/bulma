@@ -31,6 +31,7 @@ $container = $containerBuilder->build();
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/', ['App\Controllers\HomeController', 'index']);
+    $r->get('/category/{id:\d+}', ['App\Controllers\HomeController', 'category']);
 });
 
 // Fetch method and URI from somewhere

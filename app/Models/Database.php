@@ -79,6 +79,38 @@ class Database
          $stmt->execute($delete->getBindValues());
     }
 
+    public function getPaginatedFrom($table, $row, $id, $page = 1, $rows = 1)
+    {
+        $select = $this->queryFactory->newSelect();
+        $select
+            ->cols(['*'])
+            ->from($table)
+            ->where("$row = :row")
+            ->bindValue(':row', $id)
+            ->page($page)
+            ->setPaging($rows);
+
+        $stmt = $this->pdo->prepare($select->getStatement());
+        $stmt->execute($select->getBindValues());
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCount($table, $row, $value)
+    {
+        $select = $this->queryFactory->newSelect();
+        $select
+            ->cols(['*'])
+            ->from($table)
+            ->where("$row = :$row")
+            ->bindValue($row, $value);
+
+        $stmt = $this->pdo->prepare($select->getStatement());
+        $stmt->execute($select->getBindValues());
+
+        return count($stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
 
 
 

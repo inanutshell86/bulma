@@ -3,6 +3,7 @@
 use App\Models\Database;
 use App\Models\ImageManager as Image;
 use League\Plates\Engine;
+use JasonGrimes\Paginator;
 
 function config($field)
 {
@@ -57,4 +58,21 @@ function getImg($img)
     $pic = new Image();
 
     return $pic->getImg($img);
+}
+
+function paginate($count, $page, $perPage, $url)
+{
+    $totalItems = $count;
+    $itemsPerPage = $perPage;
+    $currPage = $page;
+    $urlPattern = $url;
+
+    $paginator = new Paginator($totalItems, $itemsPerPage, $currPage, $urlPattern);
+
+    return $paginator;
+}
+
+function paginator($paginator)
+{
+    include(dirname(__FILE__) . "/Views/partials/pagination.php");
 }
