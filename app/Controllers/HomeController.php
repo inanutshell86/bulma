@@ -31,4 +31,26 @@ class HomeController extends Controller
             'category' => $category
         ]);
     }
+
+    public function user($id)
+    {
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $perPage = 8;
+        $photos = $this->db->getPaginatedFrom('photos', 'user_id', $id, $page, $perPage);
+
+        $paginator = paginate(
+            $this->db->getCount('photos', 'user_id', $id),
+            $page,
+            $perPage,
+            "/user/$id?page=(:num)"
+        );
+
+        $user = $this->db->find('users', $id);
+
+        echo $this->view->render('user', [
+            'photos' => $photos,
+            'user' => $user,
+            'paginator' => $paginator
+        ]);
+    }
 }
