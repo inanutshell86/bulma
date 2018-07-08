@@ -4,6 +4,7 @@ use App\Models\Database;
 use App\Models\ImageManager as Image;
 use League\Plates\Engine;
 use JasonGrimes\Paginator;
+use Delight\Auth\Auth;
 
 function config($field)
 {
@@ -75,4 +76,19 @@ function paginate($count, $page, $perPage, $url)
 function paginator($paginator)
 {
     include(dirname(__FILE__) . "/Views/partials/pagination.php");
+}
+
+function auth()
+{
+    global $container;
+
+    return $container->get(Auth::class);
+}
+
+function redirect($path) {
+    header("Location: $path");exit;
+}
+
+function back() {
+    header("Location: " . $_SERVER['HTTP_REFERER']);exit;
 }

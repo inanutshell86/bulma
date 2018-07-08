@@ -5,6 +5,7 @@ use DI\ContainerBuilder;
 use FastRoute\RouteCollector;
 use League\Plates\Engine;
 use Illuminate\Support;
+use Delight\Auth\Auth;
 
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->addDefinitions([
@@ -24,6 +25,19 @@ $containerBuilder->addDefinitions([
 
     QueryFactory::class => function() {
         return new QueryFactory('mysql');
+    },
+
+    Auth::class => function($container) {
+        return new Auth($container->get('PDO'));
+    },
+
+    Swift_Mailer::class => function() {
+        $transport = (new Swift_SmtpTransport('smtp.mail.yahoo.com', 587))
+            ->setUsername('ihor.khystiuk@yahoo.com')
+            ->setPassword('Rm3$\8%E)kh{YDX5')
+        ;
+
+        return new Swift_Mailer($transport);
     }
 ]);
 
@@ -33,6 +47,11 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/', ['App\Controllers\HomeController', 'index']);
     $r->get('/category/{id:\d+}', ['App\Controllers\HomeController', 'category']);
     $r->get('/user/{id:\d+}', ['App\Controllers\HomeController', 'user']);
+
+
+    $r->get('/login', ['App\Controllers\LoginController', 'showForm']);
+    $r->post('/login', ['App\Controllers\LoginController', 'login']);
+    $r->get('/logout', ['App\Controllers\LoginController', 'logout']);
 });
 
 // Fetch method and URI from somewhere
