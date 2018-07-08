@@ -32,12 +32,15 @@ $containerBuilder->addDefinitions([
     },
 
     Swift_Mailer::class => function() {
-        $transport = (new Swift_SmtpTransport('smtp.mail.yahoo.com', 587))
-            ->setUsername('ihor.khystiuk@yahoo.com')
-            ->setPassword('Rm3$\8%E)kh{YDX5')
+        $transport = (new Swift_SmtpTransport(
+            config('mail.smtp'),
+            config('mail.port')
+        ))
+            ->setUsername(config('mail.email'))
+            ->setPassword(config('mail.password'))
         ;
 
-        return new Swift_Mailer($transport);
+        return  new Swift_Mailer($transport);
     }
 ]);
 
@@ -52,6 +55,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/login', ['App\Controllers\LoginController', 'showForm']);
     $r->post('/login', ['App\Controllers\LoginController', 'login']);
     $r->get('/logout', ['App\Controllers\LoginController', 'logout']);
+
+    $r->get('/register', ['App\Controllers\RegisterController', 'showForm']);
+    $r->post('/register', ['App\Controllers\RegisterController', 'register']);
 });
 
 // Fetch method and URI from somewhere

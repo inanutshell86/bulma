@@ -7,5 +7,12 @@ return [
         "username" => "root",
         "password" => ""
     ],
-    "uploadsFolder" => "uploads/"
+    "uploadsFolder" => "uploads/",
+    "mail"  =>  [
+        "smtp"  =>  "smtp.mail.yahoo.com",
+        "port"  =>  587,
+        "encryption" => "tls",
+        "email" => "",
+        "password" => ""
+    ]
 ];
