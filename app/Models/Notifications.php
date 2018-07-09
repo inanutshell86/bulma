@@ -11,7 +11,7 @@ class Notifications
         $this->mailer = $mailer;
     }
 
-    public function signUp($email, $selector, $token)
+    public function emailWasChanged($email, $selector, $token)
     {
         $msg = 'https://php02/verify_email?selector=' . \urlencode($selector) . '&token' . \urlencode($token);
 

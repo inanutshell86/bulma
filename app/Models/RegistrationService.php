@@ -23,9 +23,8 @@ class RegistrationService
     public function make($email, $password, $username)
     {
         $userId = $this->auth->register($email, $password, $username, function ($selector, $token) use ($email) {
-            $this->notifications->signUp($email, $selector, $token);
+            $this->notifications->emailWasChanged($email, $selector, $token);
         });
-        dd('hi from make');
         $this->db->update('users', $userId, ['roles_mask' => Roles::USER]);
 
         return $userId;
