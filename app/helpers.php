@@ -5,6 +5,7 @@ use App\Models\ImageManager as Image;
 use League\Plates\Engine;
 use JasonGrimes\Paginator;
 use Delight\Auth\Auth;
+use App\Models\Roles;
 
 function config($field)
 {
@@ -91,4 +92,9 @@ function redirect($path) {
 
 function back() {
     header("Location: " . $_SERVER['HTTP_REFERER']);exit;
+}
+
+function getRole($key)
+{
+    return Roles::getRole($key);
 }

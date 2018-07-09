@@ -12,7 +12,7 @@ final class Roles
         return [
             [
                 'id' => self::USER,
-                'title' => 'Обычный потльзователь'
+                'title' => 'Обычный пользователь'
             ],
             [
                 'id' => self::ADMIN,

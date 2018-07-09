@@ -80,6 +80,31 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->get('/email-verification', ['App\Controllers\VerificationController', 'showForm']);
     $r->post('/email-verification', ['App\Controllers\VerificationController', 'verify']);
+
+    $r->addGroup('/admin', function (RouteCollector $r) {
+        $r->get('', ['App\Controllers\Admin\HomeController', 'index']);
+
+        $r->get('/categories', ['App\Controllers\Admin\CategoriesController', 'index']);
+        $r->get('/categories/create', ['App\Controllers\Admin\CategoriesController', 'create']);
+        $r->post('/categories/store', ['App\Controllers\Admin\CategoriesController', 'store']);
+        $r->get('/categories/{id:\d+}/edit', ['App\Controllers\Admin\CategoriesController', 'edit']);
+        $r->post('/categories/{id:\d+}/update', ['App\Controllers\Admin\CategoriesController', 'update']);
+        $r->get('/categories/{id:\d+}/delete', ['App\Controllers\Admin\CategoriesController', 'delete']);
+
+        $r->get('/photos', ['App\Controllers\Admin\PhotosController', 'index']);
+        $r->get('/photos/create', ['App\Controllers\Admin\PhotosController', 'create']);
+        $r->post('/photos/store', ['App\Controllers\Admin\PhotosController', 'store']);
+        $r->get('/photos/{id:\d+}/edit', ['App\Controllers\Admin\PhotosController', 'edit']);
+        $r->post('/photos/{id:\d+}/update', ['App\Controllers\Admin\PhotosController', 'update']);
+        $r->get('/photos/{id:\d+}/delete', ['App\Controllers\Admin\PhotosController', 'delete']);
+
+        $r->get('/users', ['App\Controllers\Admin\UsersController', 'index']);
+        $r->get('/users/create', ['App\Controllers\Admin\UsersController', 'create']);
+        $r->post('/users/store', ['App\Controllers\Admin\UsersController', 'store']);
+        $r->get('/users/{id:\d+}/edit', ['App\Controllers\Admin\UsersController', 'edit']);
+        $r->post('/users/{id:\d+}/update', ['App\Controllers\Admin\UsersController', 'update']);
+        $r->get('/users/{id:\d+}/delete', ['App\Controllers\Admin\UsersController', 'delete']);
+    });
 });
 
 // Fetch method and URI from somewhere
