@@ -67,6 +67,11 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/photos/{id:\d+}/edit', ['App\Controllers\PhotosController', 'edit']);
     $r->post('/photos/{id:\d+}/update', ['App\Controllers\PhotosController', 'update']);
     $r->get('/photos/{id:\d+}/delete', ['App\Controllers\PhotosController', 'delete']);
+
+    $r->get('/profile/info', ['App\Controllers\ProfileController', 'showInfo']);
+    $r->get('/profile/security', ['App\Controllers\ProfileController', 'showSecurity']);
+    $r->post('/profile/info', ['App\Controllers\ProfileController', 'postInfo']);
+    $r->post('/profile/security', ['App\Controllers\ProfileController', 'postSecurity']);
 });
 
 // Fetch method and URI from somewhere
