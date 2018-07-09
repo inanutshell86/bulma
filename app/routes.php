@@ -77,6 +77,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->post('/password-recovery', ['App\Controllers\ResetPasswordController', 'recovery']);
     $r->get('/password-recovery/form', ['App\Controllers\ResetPasswordController', 'showSetForm']);
     $r->post('/password-recovery/change', ['App\Controllers\ResetPasswordController', 'change']);
+
+    $r->get('/email-verification', ['App\Controllers\VerificationController', 'showForm']);
+    $r->post('/email-verification', ['App\Controllers\VerificationController', 'verify']);
 });
 
 // Fetch method and URI from somewhere
