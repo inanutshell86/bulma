@@ -111,20 +111,18 @@ class Database
         return count($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
+    public function whereAll($table, $row, $id,  $limit = 4)
+    {
+        $select = $this->queryFactory->newSelect();
+        $select->cols(['*'])
+            ->from($table)
+            ->limit($limit)
+            ->where("$row = :id")
+            ->bindValue(":id", $id);
 
+        $stmt = $this->pdo->prepare($select->getStatement());
+        $stmt->execute($select->getBindValues());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

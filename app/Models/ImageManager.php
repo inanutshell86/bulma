@@ -50,4 +50,12 @@ class ImageManager
         return '/img/no-user.png';
     }
 
+    public function getDimensions($file)
+    {
+        if($this->checkImageExist($file)) {
+            list($width, $height) = getimagesize($this->folder . $file);
+            return $width . "x" . $height;
+        }
+    }
+
 }

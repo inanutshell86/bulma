@@ -58,6 +58,15 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 
     $r->get('/register', ['App\Controllers\RegisterController', 'showForm']);
     $r->post('/register', ['App\Controllers\RegisterController', 'register']);
+
+    $r->get('/photos', ['App\Controllers\PhotosController', 'index']);
+    $r->get('/photos/{id:\d+}', ['App\Controllers\PhotosController', 'show']);
+    $r->get('/photos/{id:\d+}/download', ['App\Controllers\PhotosController', 'download']);
+    $r->get('/photos/create', ['App\Controllers\PhotosController', 'create']);
+    $r->post('/photos/store', ['App\Controllers\PhotosController', 'store']);
+    $r->get('/photos/{id:\d+}/edit', ['App\Controllers\PhotosController', 'edit']);
+    $r->post('/photos/{id:\d+}/update', ['App\Controllers\PhotosController', 'update']);
+    $r->get('/photos/{id:\d+}/delete', ['App\Controllers\PhotosController', 'delete']);
 });
 
 // Fetch method and URI from somewhere
