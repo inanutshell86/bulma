@@ -18,4 +18,10 @@ class Notifications
         $this->mailer->send($email, $msg);
     }
 
+    public function passwordReset($email, $selector, $token)
+    {
+        $msg = 'https://php02/password-recovery/form?selector=' . \urlencode($selector) . '&token=' . \urlencode($token);
+        $this->mailer->send($email, $msg);
+    }
+
 }
